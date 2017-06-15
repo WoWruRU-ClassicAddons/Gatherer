@@ -91,7 +91,7 @@ Gather_IconSet = {
 			[TREASURE_NIGHTDRAGON]		= "Interface\\Icons\\INV_Misc_Food_45",
 			[TREASURE_WHIPPERROOT]		= "Interface\\Icons\\INV_Misc_Food_55",
 			[TREASURE_WINDBLOSSOM]		= "Interface\\Icons\\INV_Misc_Food_58",
-			[TREASURE_SONGFLOWER]		= "Interface\\Icons\\Spell_Holy_MindVision",
+		--	[TREASURE_SONGFLOWER]		= "Interface\\Icons\\Spell_Holy_MindVision",
 		},
 		["Test"]	= {["default"] = "Interface\\AddOns\\Gatherer\\Shaded\\Test"},
 	},

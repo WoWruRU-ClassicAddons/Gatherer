@@ -4,6 +4,7 @@
 		Revision: $Id: Gatherer.xml 263 2006-07-26 17:56:54Z islorgris $
 	-->
 	<Script file="localization.lua"/>
+	<Script file="localizationRU.lua"/>
 	<Script file="UI_localization.lua"/>
 	<Script file="GatherRegionData.lua"/>
 	<Script file="GatherIcons.lua"/>
@@ -43,15 +44,17 @@
 					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMLEFT");	
 					local itemIDtable =  Gatherer_MakeName(this:GetID())
 					local id;
-					GameTooltip:SetText(itemIDtable[1].name, 1.0, 0.82, 0.0, 1,1);
-					GameTooltip:AddLine("Count: "..itemIDtable[1].count, 0.82, 1.0, 0.0);
+					local dbName = string.gsub(itemIDtable[1].name, "^%s%s", "");
+					GameTooltip:SetText(dbName, 1.0, 0.82, 0.0, 1,1);
+					--GameTooltip:AddLine("|cffe6cc80Количество: |r|cffff8000"..itemIDtable[1].count.."|r", 0.82, 1.0, 0.0);
 					for id in itemIDtable do
 						if ( id ~= 1 ) then
-							GameTooltip:AddLine(itemIDtable[id].name, 1.0, 0.82, 0.0, 1,1);
-							GameTooltip:AddLine("Count: "..itemIDtable[id].count, 0.82, 1.0, 0.0);
+							GameTooltip:AddLine(string.gsub(itemIDtable[id].name, "^%s%s", ""), 1.0, 0.82, 0.0, 1,1);
+							--GameTooltip:AddLine(itemIDtable[id].name, 1.0, 0.82, 0.0, 1,1);
+							--GameTooltip:AddLine("    Количество: "..itemIDtable[id].count, 0.82, 1.0, 0.0);
 						end
 					end
-					GameTooltip:AddLine(itemIDtable[1].dist.." units ("..(itemIDtable[1].dist * 4).." secs)", 0.0, 0.82, 1.0);
+<!-- 					GameTooltip:AddLine(itemIDtable[1].dist.." units ("..(itemIDtable[1].dist * 4).." secs)", 0.0, 0.82, 1.0); -->
 					GameTooltip:Show();
 				end
 			</OnEnter>
@@ -154,16 +157,8 @@
 				else
 					WorldMapTooltip:SetOwner(this, "ANCHOR_RIGHT");
 				end
-				if ( not IsAltKeyDown() ) then
-					WorldMapTooltip:SetText(this.toolTip);
-				else
-					local toolTipText, bonusInfo = Gatherer_GetMenuName(this.gatherName);
-					if (bonusInfo) then
-						toolTipText = format("%s\n%s", toolTipText, bonusInfo);
-					end
-					toolTipText = format("%s\nc:%d z:%d l:%d", toolTipText, this.continent, this.zoneIndex, this.localIndex);
-					WorldMapTooltip:SetText(toolTipText);
-				end
+				local dbNameTooltip = string.gsub(this.gatherName, "^%s+", "");
+				WorldMapTooltip:SetText(dbNameTooltip);
 				WorldMapTooltip:Show();
 			</OnEnter>
 			<OnLeave>

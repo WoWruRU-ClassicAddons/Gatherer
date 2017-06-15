@@ -205,15 +205,15 @@
 
 	<!-- Quickmenu frame -->
 	<Frame name="GathererUI_Popup" frameStrata="DIALOG" hidden="true" parent="UIParent">
-		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border.blp" tile="true">
 			<BackgroundInsets>
-				<AbsInset left="11" right="12" top="12" bottom="11"/>
+				<AbsInset left="4" right="4" top="4" bottom="4"/>
 			</BackgroundInsets>
 			<TileSize>
-				<AbsValue val="32"/>
+				<AbsValue val="16"/>
 			</TileSize>
 			<EdgeSize>
-				<AbsValue val="32"/>
+				<AbsValue val="16"/>
 			</EdgeSize>
 		</Backdrop>
 		<Frames>
@@ -336,7 +336,7 @@
 					<Anchors>
 						<Anchor point="TOP" relativeTo="$parentHeader">
 							<Offset>
-								<AbsDimension x="0" y="-13"/>
+								<AbsDimension x="0" y="-14"/>
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -373,7 +373,7 @@
 		</Layers>
 		<Frames>
 			<!-- Tabs -->
-			<Button name="GathererUI_DialogFrameTab1" inherits="GathererUI_FrameTabButtonTemplate" id="1" text="GATHERER_TAB_FILTERS_TEXT">
+			<Button name="GathererUI_DialogFrameTab1" inherits="GathererUI_FrameTabButtonTemplate" id="1" text="GATHERER_TAB_FILTERS_TEXT" hidden = "true">
 				<Anchors>
 					<Anchor point="CENTER" relativePoint="BOTTOMLEFT">
 						<Offset>
@@ -429,7 +429,7 @@
 			</Button>
 
 			<!-- Frame handling buttons -->
-			<Button name="GathererUI_CallHelpButton">
+<!-- 			<Button name="GathererUI_CallHelpButton">
 				<Size>
 					<AbsDimension x="24" y="30" /> 
 				</Size>
@@ -453,9 +453,30 @@
 				<NormalTexture file="Interface\Buttons\UI-MicroButton-Help-Up" /> 
 				<PushedTexture file="Interface\Buttons\UI-MicroButton-Help-Down" /> 
 				<HighlightTexture file="Interface\Buttons\UI-MicroButton-Hilight" alphaMode="ADD" /> 
-			</Button>
+			</Button> -->
 			
-			<Button name="GathererUI_CloseButton" text="CLOSE" inherits="UIPanelButtonTemplate">
+			<Button name="GathererUI_CloseButton" text="Выход">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-5" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						GathererUI_HideOptions();
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\CancelButton-Up"/>
+				<PushedTexture file="Interface\Buttons\CancelButton-Down"/>
+				<HighlightTexture file="Interface\Buttons\CancelButton-Highlight" alphaMode="ADD"/>
+			</Button>
+
+<!-- 			<Button name="GathererUI_CloseButton" text="Выход" inherits="UIPanelButtonTemplate">
 				<Size>
 					<AbsDimension x="100" y="25"/>
 				</Size>
@@ -471,9 +492,9 @@
 						GathererUI_HideOptions();
 					</OnClick>
 				</Scripts>
-			</Button>
+			</Button> -->
 
-			<Button name="GathererUI_ZoneRematchButton" text="Zone Match" inherits="UIPanelButtonTemplate">
+			<!-- <Button name="GathererUI_ZoneRematchButton" text="Zone Match" inherits="UIPanelButtonTemplate">
 				<Size>
 					<AbsDimension x="100" y="25"/>
 				</Size>
@@ -500,15 +521,15 @@
 						GameTooltip:Hide();
 					</OnLeave>
 				</Scripts>
-			</Button>
-			<Button name="GathererUI_ReportButton" text="GATHERER_TEXT_TOGGLE_REPORT" inherits="UIPanelButtonTemplate">
+			</Button> -->
+			<!-- <Button name="GathererUI_ReportButton" text="GATHERER_TEXT_TOGGLE_REPORT" inherits="UIPanelButtonTemplate">
 				<Size>
 					<AbsDimension x="100" y="25"/>
 				</Size>
 				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="GathererUI_ZoneRematchButton" relativePoint="TOPRIGHT">
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
 						<Offset>
-							<AbsDimension x="5" y="0"/>
+							<AbsDimension x="114" y="40"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -534,9 +555,9 @@
 					<AbsDimension x="100" y="25"/>
 				</Size>
 				<Anchors>
-					<Anchor point="TOPRIGHT" relativeTo="GathererUI_CloseButton" relativePoint="TOPLEFT">
+					<Anchor point="TOPLEFT" relativeTo="GathererUI_ReportButton" relativePoint="TOPRIGHT">
 						<Offset>
-							<AbsDimension x="-5" y="0"/>
+							<AbsDimension x="5" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -556,14 +577,14 @@
 						GameTooltip:Hide();
 					</OnLeave>
 				</Scripts>
-			</Button>
+			</Button> -->
 
 		</Frames>
 		<Scripts>
 			<OnLoad>
 				-- Tab Handling code
 				PanelTemplates_SetNumTabs(this, 3);
-				PanelTemplates_SetTab(this, 1);
+				PanelTemplates_SetTab(this, 2);
 			</OnLoad>
 			<OnShow>
 				PlaySound("UChatScrollButton");
@@ -595,7 +616,7 @@
 				this:SetBackdropColor(0,0,0)	
 			</OnLoad>
 		</Scripts>
-		<Frames>
+		<!-- <Frames>
 			<Frame name="GathererUI_DropDownHerbs" inherits="UIDropDownMenuTemplate" id="2">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
@@ -885,7 +906,7 @@
 				</Scripts>
 			</CheckButton>
 
-			<Button name="GathererUI_ButtonResetHerb" text="Reset" inherits="UIPanelButtonTemplate">
+			<Button name="GathererUI_ButtonResetHerb" text="Сбросить" inherits="UIPanelButtonTemplate">
 				<Size>
 					<AbsDimension x="100" y="25"/>
 				</Size>
@@ -909,7 +930,7 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-			<Button name="GathererUI_ButtonResetOre" text="Reset" inherits="UIPanelButtonTemplate">
+			<Button name="GathererUI_ButtonResetOre" text="Сбросить" inherits="UIPanelButtonTemplate">
 				<Size>
 					<AbsDimension x="100" y="25"/>
 				</Size>
@@ -933,7 +954,7 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-			<Button name="GathererUI_ButtonResetTreasure" text="Reset" inherits="UIPanelButtonTemplate">
+			<Button name="GathererUI_ButtonResetTreasure" text="Сбросить" inherits="UIPanelButtonTemplate">
 				<Size>
 					<AbsDimension x="100" y="25"/>
 				</Size>
@@ -1024,7 +1045,7 @@
 				</Scripts>
 			</CheckButton>
 
-		</Frames>
+		</Frames> -->
 	</Frame>
 
 
@@ -1823,7 +1844,7 @@
 					</OnLoad>
 					<OnClick>
 						if (this:GetChecked()) then
-							GatherConfig.HideIcon = tonumber("1");;
+							GatherConfig.HideIcon = tonumber("1");
 							GathererUI_IconFrame:Hide();
 						else
 							GatherConfig.HideIcon = tonumber("0");
@@ -1897,7 +1918,8 @@
 						getglobal(this:GetName().."Text"):SetText(GATHERER_TEXT_RADIUS);
 						getglobal(this:GetName().."High"):SetText();
 						getglobal(this:GetName().."Low"):SetText();
-						this:SetMinMaxValues(75, 130);
+						<!-- this:SetMinMaxValues(75, 130); -->
+						this:SetMinMaxValues(50, 90);
 						this:SetValueStep(1);
 						this.tooltipText = GATHERER_TEXT_RADIUS_TIP;
 					</OnLoad>

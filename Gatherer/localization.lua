@@ -609,6 +609,8 @@ else
 	ORE_GATHER_STRING="You perform Mining on"
 	TREASURE_GATHER_STRING="You perform Opening on"
 
+	FISH_GATHER_STRING = "You perform Fishing."
+	
 	-- Length of the string to keep the gather name
 	HERB_GATHER_LENGTH=31
 	HERB_GATHER_END=-2
@@ -789,27 +791,35 @@ function Gatherer_ExtractItemFromTooltip()
 	end
 end
 
-function Gatherer_FindFishType(fishItem, fishTooltip)
-		if ( fishItem  and (strfind(fishItem, TREASURE_FISHNODE_TRIGGER1) ))
-		then
-			return TREASURE_FISHWRECK;
-		-- Fish School
-		elseif ( fishTooltip and (strfind(fishTooltip, TREASURE_FISHNODE_TRIGGER4) or 
-					(TREASURE_FISHNODE_TRIGGER3 and strfind(fishTooltip, TREASURE_FISHNODE_TRIGGER3))))
-		then
-			return TREASURE_FISHNODE;
-		-- Floating Wreckage and Oil Spill
-		elseif ( fishTooltip and 
-				 (strfind(fishTooltip, TREASURE_FISHNODE_TRIGGER5) or
-				  strfind(fishTooltip, TREASURE_FISHNODE_TRIGGER6)))
-		then
-			return TREASURE_FISHWRECK;
-		-- Elemental Water
-		elseif ( fishTooltip and strfind(fishTooltip, TREASURE_FISHNODE_TRIGGER7) ) 
-		then
-			return TREASURE_FISHELEM;
-		end
-	return nil;
+function Gatherer_FindFishType(fishTooltip)
+	--if (fishTooltip) then Gatherer_Print("DEBUG: fishTooltip="..fishTooltip); end;
+	--fishTooltipL = strlower(fishTooltip);
+	if (strfind(fishTooltip, "wreckage")) or (strfind(fishTooltip, "floating")) or (strfind(fishTooltip, "debris")) or (strfind(fishTooltip, "oil spill")) then return TREASURE_FISHWRECK; end
+	if (strfind(fishTooltip, "fish")) or (strfind(fishTooltip, "school")) or (strfind(fishTooltip, "School")) then return TREASURE_FISHNODE;
+
+	else
+
+
+		-- if (strfind(fishTooltip, TREASURE_FISHNODE_TRIGGER1)) then
+		-- return TREASURE_FISHWRECK;
+		-- -- Fish School
+		-- elseif ( fishTooltip and (strfind(fishTooltip, TREASURE_FISHNODE_TRIGGER4) or
+		-- 			(TREASURE_FISHNODE_TRIGGER3 and strfind(fishTooltip, TREASURE_FISHNODE_TRIGGER3))))
+		-- then
+		-- 	return TREASURE_FISHNODE;
+		-- -- Floating Wreckage and Oil Spill
+		-- elseif ( fishTooltip and
+		-- 		 (strfind(fishTooltip, TREASURE_FISHNODE_TRIGGER5) or
+		-- 		  strfind(fishTooltip, TREASURE_FISHNODE_TRIGGER6)))
+		-- then
+		-- 	return TREASURE_FISHWRECK;
+		-- -- Elemental Water
+		-- elseif ( fishTooltip and strfind(fishTooltip, TREASURE_FISHNODE_TRIGGER7) )
+		-- then
+		-- 	return TREASURE_FISHELEM;
+		-- end
+		return nil;
+	end
 end
 
 function Gatherer_FindHerbType(gather)

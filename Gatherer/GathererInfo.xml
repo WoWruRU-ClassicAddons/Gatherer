@@ -305,7 +305,7 @@
 						</Anchor>
 					</Anchors>
 				</Texture>
-				<FontString inherits="GameFontNormal" text="Gatherer Info">
+				<FontString inherits="GameFontNormal" text="Gatherer: Статистика">
 					<Size>
 						<AbsDimension x="360" y="0"/>
 					</Size>
@@ -321,7 +321,7 @@
 		</Layers>
 		<Frames>
 			<!-- Tab code -->
-			<Button name="GathererInfo_DialogFrameTab1" inherits="GathererInfo_FrameTabButtonTemplate" id="1" text="GATHERER_TEXT_TOGGLE_REPORT">
+			<Button name="GathererInfo_DialogFrameTab1" inherits="GathererInfo_FrameTabButtonTemplate" id="1" text="GATHERER_TEXT_TOGGLE_REPORT" hidden = "true">
 				<Anchors>
 					<Anchor point="CENTER" relativePoint="BOTTOMLEFT">
 						<Offset>
@@ -339,7 +339,7 @@
 					</OnLeave>
 				</Scripts>
 			</Button>
-			<Button name="GathererInfo_DialogFrameTab2" inherits="GathererInfo_FrameTabButtonTemplate" id="2" text="GATHERER_TEXT_TOGGLE_SEARCH">
+			<Button name="GathererInfo_DialogFrameTab2" inherits="GathererInfo_FrameTabButtonTemplate" id="2" text="GATHERER_TEXT_TOGGLE_SEARCH" hidden = "true">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="GathererInfo_DialogFrameTab1" relativePoint="TOPRIGHT">
 						<Offset>
@@ -357,11 +357,11 @@
 					</OnLeave>
 				</Scripts>
 			</Button>
-			<Button name="GathererInfo_FrameHomeCancel" inherits="GameMenuButtonTemplate" text="CLOSE">
+			<Button name="GathererInfo_FrameHomeCancel" inherits="UIPanelCloseButton">
 				<Anchors>
-					<Anchor point="BOTTOMRIGHT" relativeTo="GathererInfo_DialogFrame" relativePoint="BOTTOMRIGHT">
+					<Anchor point="TOPRIGHT" relativeTo="GathererInfo_DialogFrame" relativePoint="TOPRIGHT">
 						<Offset>
-							<AbsDimension x="-15" y="15"/>
+							<AbsDimension x="-4" y="-4"/>
 						</Offset>
 					</Anchor>
 				</Anchors>

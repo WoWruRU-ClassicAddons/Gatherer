@@ -92,9 +92,9 @@ function Gatherer_GetMenuName(inputName)
 				break;
 			end
 		end
-		if (Gather_SkillLevel[iconName]) then
-			name = name.." ["..Gather_SkillLevel[iconName].."]";
-		end
+		-- if (Gather_SkillLevel[iconName]) then
+		-- 	name = name.." ["..Gather_SkillLevel[iconName].."]";
+		-- end
 	end
 	return name, info;
 end
@@ -170,6 +170,7 @@ function Gatherer_Command(command)
 	elseif (cmd == "report" ) then
 		showGathererInfo(1);
 	elseif (cmd == "search" ) then
+		Gatherer_Print("Command disabled.")
 		showGathererInfo(2);
 	elseif (cmd == "loginfo" ) then
 		local value;
@@ -194,30 +195,30 @@ function Gatherer_Command(command)
 			if ( GatherConfig.users[Gather_Player].filterRecording[value] ) 
 			then
 				GatherConfig.users[Gather_Player].filterRecording[value] = nil;
-				Gatherer_ChatPrint("Turned filter/recording link for "..param.." off.");
+				--Gatherer_ChatPrint("Turned filter/recording link for "..param.." off.");
 			else
 				GatherConfig.users[Gather_Player].filterRecording[value] = 1;
-				Gatherer_ChatPrint("Turned filter/recording link for "..param.." on.");
+				--Gatherer_ChatPrint("Turned filter/recording link for "..param.." on.");
 			end
 		end
 	elseif (cmd == "on") then
 		GatherConfig.useMinimap = true;
 		Gatherer_OnUpdate(0, true);
 		GatherConfig.useMinimapText = "on";
-		Gatherer_ChatPrint("Turned gather minimap display on");
+		--Gatherer_ChatPrint("Turned gather minimap display on");
 	elseif (cmd == "off") then
 		GatherConfig.useMinimap = false;
 		GatherConfig.useMinimapText = "off";
 		Gatherer_OnUpdate(0, true);
-		Gatherer_ChatPrint("Turned gather minimap display off (still collecting)");
+		--Gatherer_ChatPrint("Turned gather minimap display off (still collecting)");
 	elseif (cmd == "toggle") then
 		GatherConfig.useMinimap = not GatherConfig.useMinimap;
 		Gatherer_OnUpdate(0, true);
 		if (GatherConfig.useMinimap) then
-			Gatherer_ChatPrint("Turned gather minimap display on");
+			--Gatherer_ChatPrint("Turned gather minimap display on");
 		        GatherConfig.useMinimapText = "on";
 		else
-			Gatherer_ChatPrint("Turned gather minimap display off (still collecting)");
+			--Gatherer_ChatPrint("Turned gather minimap display off (still collecting)");
 		        GatherConfig.useMinimapText = "off";
 		end
 	elseif (cmd == "dist") then
@@ -228,7 +229,7 @@ function Gatherer_Command(command)
 		else
 			GatherConfig.maxDist = value + 0.0;
 		end
-		Gatherer_ChatPrint("Setting maximum note distance to "..GatherConfig.maxDist);
+		--Gatherer_ChatPrint("Setting maximum note distance to "..GatherConfig.maxDist);
 		Gatherer_OnUpdate(0, true);
 	elseif (cmd == "fdist") then
 		local i,j, value = string.find(param, "(%d+)");
@@ -238,7 +239,7 @@ function Gatherer_Command(command)
 		else
 			GatherConfig.fadeDist = value + 0.0;
 		end
-		Gatherer_ChatPrint("Setting fade distance to "..GatherConfig.fadeDist);
+		--Gatherer_ChatPrint("Setting fade distance to "..GatherConfig.fadeDist);
 		Gatherer_OnUpdate(0, true);
 	elseif (cmd == "fperc") then
 		local i,j, value = string.find(param, "(%d+)");
@@ -248,7 +249,7 @@ function Gatherer_Command(command)
 		else
 			GatherConfig.fadePerc = value + 0.0;
 		end
-		Gatherer_ChatPrint("Setting fade percent at fade distance to "..GatherConfig.fadePerc);
+		--Gatherer_ChatPrint("Setting fade percent at fade distance to "..GatherConfig.fadePerc);
 		Gatherer_OnUpdate(0, true);
 	elseif ((cmd == "idist") or (cmd == "icondist")) then
 		local i,j, value = string.find(param, "(%d+)");
@@ -258,12 +259,12 @@ function Gatherer_Command(command)
 		else
 			GatherConfig.miniIconDist = value + 0;
 		end
-		Gatherer_ChatPrint("Setting iconic distance to "..GatherConfig.miniIconDist);
+		--Gatherer_ChatPrint("Setting iconic distance to "..GatherConfig.miniIconDist);
 		Gatherer_OnUpdate(0, true);
 	elseif (cmd == "theme") then
 		if (Gather_IconSet[param]) then
 			GatherConfig.iconSet = param;
-			Gatherer_ChatPrint("Gatherer theme set to "..GatherConfig.iconSet);
+			--Gatherer_ChatPrint("Gatherer theme set to "..GatherConfig.iconSet);
 		else
 			Gatherer_ChatPrint("Unknown theme: "..param);
 		end
@@ -282,14 +283,14 @@ function Gatherer_Command(command)
 			GatherConfig.useMinimap = false;
 		        GatherConfig.useMinimapText = "off";
 			Gatherer_OnUpdate(0, true);
-			Gatherer_ChatPrint("Turned gather minimap display off (still collecting)");
+			--Gatherer_ChatPrint("Turned gather minimap display off (still collecting)");
 		else
 			if ((GatherConfig.number > 0) and (GatherConfig.useMinimap == false)) then
 				GatherConfig.useMinimap = true;
 		        	GatherConfig.useMinimapText = "on";
-				Gatherer_ChatPrint("Turned gather minimap display on");
+				--Gatherer_ChatPrint("Turned gather minimap display on");
 			end
-			Gatherer_ChatPrint("Displaying "..GatherConfig.number.." notes at once");
+			--Gatherer_ChatPrint("Displaying "..GatherConfig.number.." notes at once");
 			Gatherer_OnUpdate(0, true);
 		end
 	elseif (cmd == "mainmap") then
@@ -301,10 +302,10 @@ function Gatherer_Command(command)
 			GatherConfig.useMainmap = true;
 		end
 		if (GatherConfig.useMainmap) then
-			Gatherer_ChatPrint("Displaying notes in main map");
+			--Gatherer_ChatPrint("Displaying notes in main map");
 			Gatherer_WorldMapDisplay:SetText("Hide Items");
 		else
-			Gatherer_ChatPrint("Not displaying notes in main map");
+			--Gatherer_ChatPrint("Not displaying notes in main map");
 			Gatherer_WorldMapDisplay:SetText("Show Items");
 		end
 
@@ -329,34 +330,34 @@ function Gatherer_Command(command)
 				GatherConfig.mapMinder = true;
 				GatherConfig.minderTime = value + 0;
 			end
-			Gatherer_ChatPrint("Setting map minder timeout to "..GatherConfig.minderTime);
+			--Gatherer_ChatPrint("Setting map minder timeout to "..GatherConfig.minderTime);
 		end
 		if (GatherConfig.mapMinder) then
-			Gatherer_ChatPrint("Map minder activated at "..GatherConfig.minderTime);
+			--Gatherer_ChatPrint("Map minder activated at "..GatherConfig.minderTime);
 		else
-			Gatherer_ChatPrint("Not minding your map");
+			--Gatherer_ChatPrint("Not minding your map");
 		end
 	elseif ((cmd == "herbs") or (cmd == "mining") or (cmd == "treasure")) then
 		if ((param == "false") or (param == "off") or (param == "no") or (param == "0")) then
 			Gatherer_SetFilter(cmd, "off");
-			Gatherer_ChatPrint("Not displaying "..cmd.." notes in minimap");
+			--Gatherer_ChatPrint("Not displaying "..cmd.." notes in minimap");
 		elseif (param == "on" or param == "On" ) then
 				Gatherer_SetFilter(cmd, "on");
-				Gatherer_ChatPrint("Displaying "..cmd.." notes in minimap");
+				--Gatherer_ChatPrint("Displaying "..cmd.." notes in minimap");
 		elseif (param == "toggle" or param == "") then
 			local cur = Gatherer_GetFilterVal(cmd);
 			if ((cur == "on") or (cur == "auto")) then
 				cur = "off";
 				Gatherer_SetFilter(cmd, "off");
-				Gatherer_ChatPrint("Not displaying "..cmd.." notes in minimap");
+				--Gatherer_ChatPrint("Not displaying "..cmd.." notes in minimap");
 			else
 				cur = "on";
 				Gatherer_SetFilter(cmd, "on");
-				Gatherer_ChatPrint("Displaying "..cmd.." notes in minimap");
+				--Gatherer_ChatPrint("Displaying "..cmd.." notes in minimap");
 			end
 		else
 			Gatherer_SetFilter(cmd, "auto");
-			Gatherer_ChatPrint("Displaying "..cmd.." notes in minimap based on ability");
+			--Gatherer_ChatPrint("Displaying "..cmd.." notes in minimap based on ability");
 		end
 		Gatherer_OnUpdate(0, true);
 		GatherMain_Draw();
@@ -364,7 +365,7 @@ function Gatherer_Command(command)
 end
 
 -- *************************************************************************
--- Events Handler
+-- Events Handleròóò
 
 function Gatherer_OnEvent(event)
 	if (not event) then return; end;
@@ -384,12 +385,15 @@ function Gatherer_OnEvent(event)
 	
 	-- process loot received message for fishing node trigger
 	elseif (strfind(event, "CHAT_MSG_LOOT")) then
-		local _, _, fishItem = string.find(arg1, GATHERER_ReceivesLoot );
+-- Gatherer_Print("DEBUG: arg1="..arg1);
+ 		local _, _, fishItem = string.find(arg1, GATHERER_ReceivesLoot );
 		local gfishTooltip = Gatherer_ExtractItemFromTooltip()
-
+--Gatherer_Print("DEBUG: gfishTooltip="..GameTooltipTextLeft1:GetText());
 		if ( fishItem and not UnitExists("mouseover") ) then
 			Gatherer_ReadBuff(event, fishItem, gfishTooltip);
 		end
+
+
 	-- process event to record, normally not possible gather (low/inexistant skill)
 	elseif (strfind(event, "UI_ERROR_MESSAGE")) then
 		-- process gather error message
@@ -479,7 +483,7 @@ function Gatherer_OnEvent(event)
 			GATHERER_LOADED = true;
 			Gatherer_OnUpdate(0, true);
 
-			Gatherer_Print("Gatherer v"..GATHERER_VERSION.." -- Loaded!");
+			--Gatherer_Print("Gatherer v"..GATHERER_VERSION.." -- Loaded!");
 			GatherConfig.useMinimap = GatherConfig.useMinimap or true;
 			GatherConfig.useMainmap = GatherConfig.useMainmap or true;
 
@@ -590,7 +594,7 @@ function Gatherer_OnEvent(event)
 end
 
 -- *************************************************************************
--- Filter related functions
+-- Filter related functions---------------------òóò2
 
 function Gatherer_SetFilter(type, value)
 	if (not Gather_Player) then return; end
@@ -956,7 +960,8 @@ function GatherMain_Draw()
 					allowed = Gatherer_GetFilter("mining");
 				else
 					specificType = Gatherer_FindTreasureType(gatherName);
-					if (specificType ) then -- Treasure
+					if ( specificType ) then -- Treasure
+
 						gatherType = 0;
 						allowed = Gatherer_GetFilter("treasure");
 					else 
@@ -973,6 +978,10 @@ function GatherMain_Draw()
 					end
 
 				end
+
+				--Gatherer_Print("DEBUG allowed "..tostring(allowed)); 
+
+
 				if (not specificType) then
 					specificType = "default";
 				end
@@ -1127,6 +1136,7 @@ function GatherMain_Draw()
 end
 
 function Gatherer_FindClosest(num, interested)
+
 	local gatherLocal = {playerC=0,playerZ=0,playerX=0,playerY=0,px=0,py=0,items={},count=0};
 		
 	if (not GATHERER_LOADED) then return gatherLocal; end
@@ -1296,7 +1306,7 @@ function Gatherer_FindClosest(num, interested)
 end
 
 -- *************************************************************************
--- Coordinates computing related functions
+-- Coordinates computing related functions------------------òóò3
 
 function isMinimapInCity()
 	local tempzoom = 0;
@@ -1384,6 +1394,9 @@ end
 
 -- Test: /script arg1="You perform Herb Gathering on Mageroyal."; Gatherer_ReadBuff("event");
 function Gatherer_ReadBuff(event, fishItem, fishTooltip)
+
+
+	--DEFAULT_CHAT_FRAME:AddMessage(event);
 	local record = false;
 	local gather, chatline;
 	local gatherType, gatherIcon, gatherCanonicalName;
@@ -1398,21 +1411,36 @@ function Gatherer_ReadBuff(event, fishItem, fishTooltip)
 
 	if ( strfind(event, "CHAT_MSG_LOOT") ) then
 	-- process loot received message for fishing node recording
-		gather = Gatherer_FindFishType(fishItem, fishTooltip);
-		if ( gather ) then
-			gatherIcon = gather;
-			gatherType = 0; -- considered as treasure
-			gatherEventType = 2;
-			record = true;
-		end
+--Gatherer_Print("DEBUG: gather="..fishItem.." chatline="..fishTooltip);
+
+		-- gather = Gatherer_FindFishType(fishItem, fishTooltip);
+		-- if ( gather ) then
+		-- 	gatherIcon = gather;
+		-- 	gatherType = 0; -- considered as treasure
+		-- 	gatherEventType = 2;
+		-- 	record = true;
+		-- end
+
+
 	elseif( strfind(event, "CHAT_MSG") or strfind(event, "CHAT_MSG_SPELL_SELF_BUFF")) then
+--123
 		if (string.find(chatline, HERB_GATHER_STRING)) then
 			record = true;
 			gather = string.lower(strsub(chatline, HERB_GATHER_LENGTH, HERB_GATHER_END))
 
 			gatherType = 1;
 			gatherIcon = gather;
+		elseif (string.find(chatline, FISH_GATHER_STRING)) then
+			local gfishTooltip = Gatherer_ExtractItemFromTooltip()
+			gather = Gatherer_FindFishType(gfishTooltip);
+-- Gatherer_Print("DEBUG: gfishTooltip="..gfishTooltip);
+			if ( gather ) then
+				gatherIcon = gather;
+				gatherType = 0; -- considered as treasure
+				record = true;
+			end
 		elseif (string.find(chatline, ORE_GATHER_STRING)) then
+			--DEFAULT_CHAT_FRAME:AddMessage(chatline);
 			record = true;
 			gather = string.lower(strsub(chatline, ORE_GATHER_LENGTH, ORE_GATHER_END))
 
@@ -1444,7 +1472,8 @@ function Gatherer_ReadBuff(event, fishItem, fishTooltip)
 		
 		-- process non gatherable item because of low/lack of skill
 		if( gather and not gather ~= "" and (strfind(chatline, TRADE_HERBALISM) or strfind(chatline, OLD_TRADE_HERBALISM) or strfind(chatline, GATHER_HERBALISM)) ) then -- Herb
---Gatherer_Print("DEBUG record Herb");
+-- Gatherer_Print("DEBUG record Herb");
+-- Gatherer_Print("DEBUG gather="..gather);
 			record = true;
 			gatherType = 1;
 			gatherIcon = Gatherer_FindHerbType(gather);
@@ -1454,22 +1483,27 @@ function Gatherer_ReadBuff(event, fishItem, fishTooltip)
 			record = true;
 			gatherType = 2;
 			gatherIcon = Gatherer_FindOreType(gather);
+--Gatherer_Print("DEBUG: gatherIcon= "..gatherIcon);
 			gatherEventType = 1;
 		elseif(gather and not gather ~= "" and (strfind(chatline, TRADE_OPENING) or chatline=="")) then -- Treasure
 --Gatherer_Print("DEBUG record Treasure");
 			record = true
 			gatherType = 0;
-			gatherIcon, gatherCanonicalName = Gatherer_FindTreasureType(gather);
+			gatherCanonicalName = Gatherer_FindTreasureType(gather);
+			--Gatherer_Print(gatherCanonicalName);
 --			if (not gatherIcon) then
 --Gatherer_Print("DEBUG record Treasure, no icon abort record");
 --				Gatherer_RecordFlag = 0;
 --				return;
 --			end;
-			if ( gatherCanonicalName ) then gather = gatherCanonicalName; end;
+			if ( gatherCanonicalName ) then gather = " "..gatherCanonicalName; 
+			gatherIcon = gatherCanonicalName
+			end;
 			gatherEventType = 1;
 		end
 		if (not gatherIcon) then 
-			Gatherer_Print("Gatherer: no icon identified, aborting record.");
+			Gatherer_Print("Gatherer: no icon identified.");
+
 			Gatherer_RecordFlag = 0;
 			return; 
 		end
@@ -1485,6 +1519,7 @@ function Gatherer_ReadBuff(event, fishItem, fishTooltip)
 --Gatherer_Print("DEBUG: record type: "..gatherEventType);
 	if (record == true) then
 		Gatherer_AddGatherHere(gather, gatherType, gatherIcon, gatherEventType);
+--Gatherer_Print("DEBUG:  gather: "..gather.."gatherIcon: "..gatherIcon);
 	end
 end
 
@@ -1497,7 +1532,7 @@ end
 --   gatherIcon (string): matching icon from Gatherer icon table (match gather name)
 --   gatherEventType (number): 0 normal gather, 1 gather without required skill, 2 fishing node
 function Gatherer_AddGatherHere(gather, gatherType, gatherIcon, gatherEventType)
-	
+--Gatherer_Print("DEBUG: gather="..gather.." gatherType = "..gatherType);
 	if ( GatherConfig.users[Gather_Player].filterRecording[gatherType] and
 		GatherConfig.users[Gather_Player].interested and
 		GatherConfig.users[Gather_Player].interested[gatherType] and
@@ -1524,6 +1559,16 @@ function Gatherer_AddGatherHere(gather, gatherType, gatherIcon, gatherEventType)
 	end
 
 	local function Gatherer_AddGatherToBase(gather, gatherType, gatherC, gatherZ, gatherX, gatherY, gatherIcon, gatherEventType)
+
+		
+		-- if (gatherType == 0) then 
+		-- 	gather = string.gsub(gather, "^.", ""); 
+		-- 	gatherIcon = string.gsub(gatherIcon, "^.", ""); 
+		-- end
+
+
+--Gatherer_Print("DEBUG: gather="..gather.."gatherType="..gatherType);
+
 		local hPos, gatherData;
 		if (not GatherItems[gatherC]) then GatherItems[gatherC] = { }; end
 		if (not GatherItems[gatherC][gatherZ]) then GatherItems[gatherC][gatherZ] = { }; end
@@ -1586,6 +1631,10 @@ function Gatherer_AddGatherHere(gather, gatherType, gatherIcon, gatherEventType)
 		GatherItems[gatherC][gatherZ][gather][found].icon = Gatherer_GetDB_IconIndex(gatherIcon, gatherType);
 	end
 
+	if gatherType == 2 or gatherType == 1 then
+		gather = " "..gather;
+	end
+
 	Gatherer_AddGatherToBase(gather, gatherType, gatherC, gatherZ, gatherX, gatherY, gatherIcon, gatherEventType);
 	Gatherer_OnUpdate(0,true);
 	GatherMain_Draw();
@@ -1593,7 +1642,7 @@ end
 
 
 -- *************************************************************************
--- Miscellaneous functions (clearing DB, dumping DB content)
+-- Miscellaneous functions (clearing DB, dumping DB content)-------------òóò4
 function Gatherer_Clear()
 	Gatherer_Print("Clearing your gather data");
 	GatherItems = { };

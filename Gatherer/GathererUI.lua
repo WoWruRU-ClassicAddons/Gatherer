@@ -90,7 +90,7 @@ function GathererUI_DialogFrame_ShowSubFrame(frameName)
 end
 function GathererUIFrameTab_OnClick()
 	if ( this:GetName() == "GathererUI_DialogFrameTab1" ) then
-		ToggleGathererUI_Dialog("GathererUI_FiltersOptionsBorderFrame");
+		--ToggleGathererUI_Dialog("GathererUI_FiltersOptionsBorderFrame");
 	elseif ( this:GetName() == "GathererUI_DialogFrameTab2" ) then
 		ToggleGathererUI_Dialog("GathererUI_GathererOptionsBorderFrame");
 	elseif ( this:GetName() == "GathererUI_DialogFrameTab3" ) then
@@ -194,10 +194,10 @@ function GathererUI_InitializeOptions()
 
 	if (not GatherConfig.showWorldMapFilters ) then
 		GatherConfig.showWorldMapFilters = tonumber("0");
-	elseif ( GatherConfig.showWorldMapFilters == 1 ) then
-		GathererWD_DropDownFilters:Show();
-	else
-		GathererWD_DropDownFilters:Hide();
+	-- elseif ( GatherConfig.showWorldMapFilters == 1 ) then
+	-- 	GathererWD_DropDownFilters:Show();
+	-- else
+	-- 	GathererWD_DropDownFilters:Hide();
 	end
 	
 	if ( GatherConfig.disableWMFreezeWorkaround and GatherConfig.disableWMFreezeWorkaround == true )
@@ -243,11 +243,11 @@ function GathererUI_InitializeOptions()
 	GathererUI_CheckMapMinder:SetChecked(GatherConfig.mapMinder);
 	GathererUI_CheckHideMiniNotes:SetChecked(GatherConfig.HideMiniNotes);
 	GathererUI_CheckToggleWorldNotes:SetChecked(GatherConfig.ToggleWorldNotes);
-	GathererUI_CheckToggleWorldFilters:SetChecked(GatherConfig.showWorldMapFilters);
-	GathererUI_CheckHerbRecord:SetChecked(GatherConfig.users[Gather_Player].filterRecording[1]);
-	GathererUI_CheckOreRecord:SetChecked(GatherConfig.users[Gather_Player].filterRecording[2]);
-	GathererUI_CheckTreasureRecord:SetChecked(GatherConfig.users[Gather_Player].filterRecording[0]);
-	GathererUI_CheckDisableWMFix:SetChecked(GatherConfig.disableWMFreezeWorkaround);
+	--GathererUI_CheckToggleWorldFilters:SetChecked(GatherConfig.showWorldMapFilters);
+	-- GathererUI_CheckHerbRecord:SetChecked(GatherConfig.users[Gather_Player].filterRecording[1]);
+	-- GathererUI_CheckOreRecord:SetChecked(GatherConfig.users[Gather_Player].filterRecording[2]);
+	-- GathererUI_CheckTreasureRecord:SetChecked(GatherConfig.users[Gather_Player].filterRecording[0]);
+	--GathererUI_CheckDisableWMFix:SetChecked(GatherConfig.disableWMFreezeWorkaround);
 
 	GathererUI_InitializeMenu();
 end
@@ -425,21 +425,20 @@ function GathererUIDropDownTreasure_Initialize()
 	local filterValue = "treasure";
 	local iconIndex = 0;
 	local dropDownText = "Treasure";
-	GathererUIDropDown_Initialize(filterValue, iconIndex, dropDownText);
 end
 
 function GathererUIDropDown_Initialize(filterValue, iconIndex, dropDownText)
 	local varMenuVal1, varMenuVal2;
 	local value = Gatherer_GetFilterVal(filterValue);
 	if ( value == "on" ) then
-		varMenuVal1 = NORMAL_FONT_COLOR_CODE.."auto".."|r";
-		varMenuVal2 = NORMAL_FONT_COLOR_CODE.."off".."|r";
+		varMenuVal1 = "|cffff7f3f".."auto".."|r";
+		varMenuVal2 = "|cffff2020".."off".."|r";
 	elseif ( value == "off" ) then
-		varMenuVal1 = NORMAL_FONT_COLOR_CODE.."auto".."|r";
-		varMenuVal2 = NORMAL_FONT_COLOR_CODE.."on".."|r";
+		varMenuVal1 = "|cffff7f3f".."auto".."|r";
+		varMenuVal2 = "|cff20ff20".."on".."|r";
 	else
-		varMenuVal1 = NORMAL_FONT_COLOR_CODE.."on".."|r";
-		varMenuVal2 = NORMAL_FONT_COLOR_CODE.."off".."|r";
+		varMenuVal1 = "|cff20ff20".."on".."|r";
+		varMenuVal2 = "|cffff2020".."off".."|r";
 	end
 	UIDropDownMenu_SetText(Gatherer_GetMenuName(value), getglobal("GathererUI_DropDown"..dropDownText));
 
